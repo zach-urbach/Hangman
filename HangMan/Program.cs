@@ -11,13 +11,10 @@ namespace HangMan
         static void Main(string[] args)
         {
             //gamestart
-           
             HangMan();
-
             Console.ReadKey();
         }
         //hangmanfunction
-
         static void HangMan()
         {
             Console.WriteLine("---- HANGMAN ----");
@@ -55,10 +52,7 @@ namespace HangMan
                 //determie if its a letter or a word guess
                 if (input.Length == 1)
                 {
-            
                     lettersGuessed += input;
-                    //letter guess. determine if its a 
-                    // corect guess
                     if (wordToGuess.Contains(input))
                     {
                         //corect guess
@@ -66,8 +60,7 @@ namespace HangMan
                         if (AllLettersGuessed(MaskedWord(wordToGuess, lettersGuessed)))
                         {
                             playing = false;
-                            Console.WriteLine("you have been spared " + playerName + " you win!");
-                          
+                            Console.WriteLine("you have been spared " + playerName + " you win!");                          
                         }
                     }
                     else
