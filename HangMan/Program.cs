@@ -8,6 +8,7 @@ namespace HangMan
 {
     class Program
     {
+        static List<string> guessedAlready= new List<string>();
         static void Main(string[] args)
         {
             //gamestart
@@ -24,6 +25,7 @@ namespace HangMan
             Console.WriteLine("Hello " + playerName + " this is hangman\nyou have to guess the right letters to form the word \nor just guess the whole word.");
             Console.WriteLine("guess wrong 7 times and you lose");
             Console.WriteLine("by the way this is your hanging good luck.");
+            Console.WriteLine();
             //boolean for continuing the game or not
             bool playing = true;
             int lives = 7;//number of guesses
@@ -49,6 +51,7 @@ namespace HangMan
                 Console.WriteLine("enter a guess");
                 //4.get input
                 string input = Console.ReadLine().ToUpper();
+                guessedAlready.Add(input);
                 //determie if its a letter or a word guess
                 if (input.Length == 1)
                 {
@@ -57,16 +60,23 @@ namespace HangMan
                     {
                         //corect guess
                         Console.WriteLine("good job");
+                        Console.WriteLine();
                         if (AllLettersGuessed(MaskedWord(wordToGuess, lettersGuessed)))
                         {
                             playing = false;
-                            Console.WriteLine("you have been spared " + playerName + " you win!");                          
+                            Console.WriteLine("you have been spared " + playerName + " you win!");
+                                
                         }
                     }
                     else
                     {
                         //incorect guess
                         Console.WriteLine("that is not one of the letters.");
+                        Console.WriteLine();
+                        foreach (string a in guessedAlready)
+                        {
+                            Console.WriteLine("You guessed that letter pick a new letter please: " + a); 
+                        }
                         lives--;
                         Console.WriteLine("guesses left " + lives);
                     }
@@ -134,8 +144,6 @@ namespace HangMan
 
         static bool AllLettersGuessed(string maskedWord)
         {
-
-
             //determine if the user has guesed all the letters of the word
             if (maskedWord.Contains("_"))
             {
